@@ -10,7 +10,7 @@ import flash.ui.Keyboard;
 import com.sss.math.M;
 /**
 ** @author J. Terry Corbet
-** @version 1.0 2014-01-26
+** @version 1.0 2014-02-07
 */
 public final class Camera
 {
@@ -89,7 +89,6 @@ public final class Camera
 		_poi = _initialPOI;
 		lookAt (_poi);
 		mode = PLANAR;
-		touched = true;
 	} // End of reset().
 
 	/* This method must be invoked at the start of every render cycle to get the camera repositioned
@@ -155,7 +154,6 @@ public final class Camera
 		_transform.recompose (comps);
 		_poi = _poi.add (delta);
 		lookAt (_poi);
-		touched = true;
 	} // End of doPlanar().
 
 	private function
@@ -216,7 +214,6 @@ public final class Camera
 		// trace ("Position Out", position, altitude);
 		_transform.position = position;
 		lookAt (target);
-		touched = true;
 	} // End of doOrbital().
 
 	private function
@@ -338,7 +335,7 @@ public final class Camera
 	} // End of keyUpHandler().
 
 	// Adapted from Away3d.
-	private function
+	public function
 	lookAt (target:Vector3D)
 	:void
 	{
@@ -372,7 +369,7 @@ public final class Camera
 		RAW[15] = 1.0;
 		
 		_transform.copyRawDataFrom (RAW);
-		// M.prettyRaw ("LookedAt", _transform);
+		touched = true;
 	} // End of lookAt().
 
 	[Inline] public final function get transform():Matrix3D { return (_transform); };
@@ -392,7 +389,6 @@ public final class Camera
 		}
 		_poi = value;
 		lookAt (_poi);
-		touched = true;
 	} // End of poi setter.
 
 	/* 2013-12-03

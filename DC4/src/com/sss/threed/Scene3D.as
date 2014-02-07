@@ -15,7 +15,7 @@ import flash.ui.Keyboard;
 import flash.utils.Dictionary;
 import flash.utils.Timer;
 
-import com.sss.threed.Camera;
+import com.sss.math.M;
 import com.sss.threed.GeometryController;
 import com.sss.threed.Object3D;
 import com.sss.threed.Stage3DBase;
@@ -24,7 +24,7 @@ import com.sss.threed.geometry.GeometryBase;
 import com.sss.threed.shader.IProgram;
 /**
 ** @author J. Terry Corbet
-** @version 1.0 2014-02-05
+** @version 1.0 2014-02-07
 */
 public class Scene3D 
 {
@@ -273,11 +273,13 @@ public class Scene3D
 				if (picked) {
 					trace ("Picked", picked.id);
 					_tab = getObjectTab (picked.id);
-					if (event.ctrlKey) {
+					if (event.shiftKey) {
 						var surface:Surface = picked.geometry.getSurfacePicked (
 							picked, event.stageX, event.stageY, stage3D);
 						trace ("Surface Picked", picked.id, ((surface) ? surface.id : "None"));
 						showSelected (picked, ((surface) ? surface.id : "None"));
+					} else if (event.ctrlKey) {
+						stage3D.camera.lookAt (picked.translation);
 					} else {
 						showSelected (picked);
 					}
