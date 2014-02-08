@@ -228,70 +228,56 @@ public final class Camera
 			case (Keyboard.UP):
 				if (event.shiftKey) {
 					pitchAcceleration = -rotationalAcceleration;
-					// trace ("PUP");
 					mode = PIVOTAL;
 				} else if (event.ctrlKey) {
 					doOrbital (0, 0, -.05);
-					// trace ("OUP");
 					mode = ORBITAL;
 				} else {
 					verticalAcceleration = linearAcceleration;
-					// trace ("UP");
 					mode = PLANAR;
 				}
 				break;
 			case (Keyboard.DOWN):
 				if (event.shiftKey) {
 					pitchAcceleration = rotationalAcceleration;
-					// trace ("PDN");
 					mode = PIVOTAL;
 				} else if (event.ctrlKey) {
 					doOrbital (0, 0, .05);
-					// trace ("ODN");
 					mode = ORBITAL;
 				} else {
 					verticalAcceleration = -linearAcceleration;
-					// trace ("DN");
 					mode = PLANAR;
 				}
 				break;
 			case (Keyboard.LEFT):
 				if (event.shiftKey) {
 					yawAcceleration = -rotationalAcceleration;
-					// trace ("HLT");
 					mode = PIVOTAL;
 				} else if (event.ctrlKey) {
 					doOrbital (0, -.1, 0);
-					// trace ("OLT");
 					mode = ORBITAL;
 				} else {
 					horizontalAcceleration = -linearAcceleration;
-					// trace ("LT");
 					mode = PLANAR;
 				}
 				break;
 			case (Keyboard.RIGHT):
 				if (event.shiftKey) {
 					yawAcceleration = rotationalAcceleration;
-					// trace ("HRT");
 					mode = PIVOTAL;
 				} else if (event.ctrlKey) {
 					doOrbital (0, .1, 0);
-					// trace ("ORT");
 					mode = ORBITAL;
 				} else {
 					horizontalAcceleration = linearAcceleration;
-					// trace ("RT");
 					mode = PLANAR;
 				}
 				break;
 			case (Keyboard.HOME):
 				zoomAcceleration = linearAcceleration;
-				// trace ("IN");
 				break;
 			case (Keyboard.END):
 				zoomAcceleration = -linearAcceleration;
-				// trace ("OUT");
 				break;
 			case (Keyboard.NUMPAD_ADD):
 				if ((! event.shiftKey) && (! event.ctrlKey)) _easing = true;
@@ -312,7 +298,6 @@ public final class Camera
 	keyUpHandler (event:KeyboardEvent)
 	:void
 	{
-		// trace ("CameraUp", "Code", event.keyCode);
 		switch (event.keyCode) {
 			case (Keyboard.SHIFT):
 			case (Keyboard.CONTROL):
