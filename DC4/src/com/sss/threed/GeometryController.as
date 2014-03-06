@@ -5,6 +5,7 @@ import flash.utils.Dictionary;
 import com.sss.threed.Object3D;
 import com.sss.threed.geometry.Axes;
 import com.sss.threed.geometry.Ball;
+import com.sss.threed.geometry.BallTex;
 import com.sss.threed.geometry.BillBoard;
 import com.sss.threed.geometry.Cube;
 import com.sss.threed.geometry.CubeTex;
@@ -18,12 +19,13 @@ import com.sss.threed.geometry.TriTester;
 import com.sss.threed.geometry.WireCube;
 /**
 ** @author J. Terry Corbet
-** @version 1.0 2014-01-11
+** @version 1.0 2014-03-05
 */
 public class GeometryController
 {
 	public static const AXES:String = "AxesGeom";
 	public static const BALL:String = "BallGeom";
+	public static const BALLTEX:String = "BallTexGeom";
 	public static const BBOARD:String = "BBoardGeom";
 	public static const CUBE:String = "CubeGeom";
 	public static const CUBETEX:String = "CubeTexGeom";
@@ -74,6 +76,8 @@ public class GeometryController
 				geometry = new Axes (obj.params);
 			} else if (gid == BALL) {
 				geometry = new Ball (obj.params);
+			} else if (gid == BALLTEX) {
+				geometry = new BallTex (obj.params);
 			} else if (gid == BBOARD) {
 				geometry = new BillBoard (obj.params);
 			} else if (gid == CUBE) {

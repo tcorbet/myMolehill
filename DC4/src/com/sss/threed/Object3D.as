@@ -28,7 +28,7 @@ import com.sss.math.M;
 import com.sss.util.U;
 /**
 ** @author J. Terry Corbet
-** @version 1.0 2014-01-29
+** @version 1.0 2014-03-01
 */
 public class Object3D
 {
@@ -215,6 +215,14 @@ public class Object3D
 		_transform.appendTranslation (x, y, z);
 		transformChanged = true;
 	} // End of translate().
+
+	public function
+	moveTo (x:Number, y:Number, z:Number)
+	:void
+	{
+		_transform.position = new Vector3D (x, y, z);
+		transformChanged = true;
+	} // End of moveTo().
 
 	public function
 	rotateLocal (angle:Number, axis:Vector3D)

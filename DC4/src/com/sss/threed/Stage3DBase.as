@@ -8,7 +8,9 @@ import flash.display.StageScaleMode;
 import flash.display3D.Context3D;
 import flash.display3D.Context3DBlendFactor;
 import flash.display3D.Context3DCompareMode;
+import flash.display3D.Context3DProfile;
 import flash.display3D.Context3DProgramType;
+import flash.display3D.Context3DRenderMode;
 import flash.display3D.Context3DStencilAction;
 import flash.display3D.Context3DTriangleFace;
 import flash.events.Event;
@@ -32,7 +34,7 @@ import com.sss.threed.Scene3D;
 import com.sss.util.U;
 /**
 ** @author J. Terry Corbet
-** @version 1.0 2014-01-28
+** @version 1.0 2014-02-27
 */
 public class Stage3DBase extends Sprite
 {
@@ -103,7 +105,7 @@ public class Stage3DBase extends Sprite
 		try {
 			stage3D = stage.stage3Ds[0];
 			stage3D.addEventListener (Event.CONTEXT3D_CREATE, initMolehill);
-			stage3D.requestContext3D ("auto", "baseline");
+			stage3D.requestContext3D (Context3DRenderMode.AUTO, Context3DProfile.BASELINE);
 		} catch (error:Error) {
 			trace ("Request Context", error.errorID, error.message);
 		}
@@ -198,7 +200,7 @@ public class Stage3DBase extends Sprite
 		_camera.updatePosition();
 
 		context3D.clear (backgroundRGBA[0], backgroundRGBA[1], backgroundRGBA[2],
-			backgroundRGBA[3], 1.0, 0.0);
+			backgroundRGBA[3], 1.0, 0x00);
 		context3D.setStencilReferenceValue (0);
 
 		var objIndex:uint = 0;

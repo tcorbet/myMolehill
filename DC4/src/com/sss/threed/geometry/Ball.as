@@ -9,7 +9,7 @@ import com.sss.threed.shader.ProgramBase;
 import com.sss.util.U;
 /**
 ** @author J. Terry Corbet
-** @version 1.0 2014-01-11
+** @version 1.0 2014-03-05
 */
 public final class Ball extends GeometryBase
 {
@@ -51,7 +51,9 @@ public final class Ball extends GeometryBase
 			// trace ("");
 		}
 
-		startSurface ("all", 0, ProgramBase.COLOR_12);
+		currentSurface = new Surface ("all", 0, ProgramBase.COLOR_12);
+		geometrySurfaces["all"] = currentSurface;
+
 		var v:Vector3D;
 		var color:Vector.<Number>;
 		var k:uint, l:uint, m:uint, n:uint;
@@ -106,16 +108,8 @@ public final class Ball extends GeometryBase
 			pVx (v.x, v.y, v.z, color[0], color[1], color[2], color[3]);
 		}
 		
-		trace ("All", indices.length, currentSurface.idx);
+		// trace ("All", indices.length, currentSurface.idx);
 	} // End of constructSurfaces().
-
-	private function
-	startSurface (id:String, offset:uint, programID:String)
-	:void
-	{
-		currentSurface = new Surface (id, offset, programID);
-		geometrySurfaces[id] = currentSurface;
-	} // End of startSurface().
 
 	private function
 	pVx (x:Number, y:Number, z:Number, r:Number, g:Number, b:Number, a:Number)
