@@ -19,7 +19,7 @@ import com.sss.threed.shader.WireFrame1;
 import com.sss.threed.shader.ProgramBase;
 /*
 ** @author J. Terry Corbet
-** @version 1.0 2014-03-05
+** @version 1.0 2014-03-09
 */
 [SWF (backgroundColor="#778877", frameRate="60", width="1000", height="750")]
 public final class Main2 extends Stage3DBase 
@@ -30,13 +30,13 @@ public final class Main2 extends Stage3DBase
 	private const SpecCubeTexture:Class;
 	[Embed (source = "../assets/TileDAll_Normal_Transformed.png")]
 	private const SpecCubeNormalMap:Class;
-	[Embed (source = "../assets/Billiard15.jpg")]
+	[Embed (source = "../assets/Billiard15t.jpg")]
 	private const BallTexture:Class;
+	private const AXIS:Vector3D = new Vector3D();
 
 	// Whether to hold a reference to your 3D Objects, or not, depends upon application logic.
 	private var axes:Object3D;
-
-private var T:Number = 0.0;
+	private var ft:Number = 0.0;
 
 	public function
 	Main2() 
@@ -124,11 +124,11 @@ private var T:Number = 0.0;
 
 		var ball3:Object3D = new Object3D ("Ball-3", GeometryController.BALLTEX, true, 18, 36);
 		ball3.uniformScale (2.5);
-		ball3.rotateLocal (100.0, Vector3D.Y_AXIS);
+		// ball3.rotateLocal (270.0, Vector3D.Y_AXIS);
 		ball3.renderCallBack = ball3Animation;
 		scene.addObject (ball3);
 		ball3.changeSurfaceMaterial (new BallTexture().bitmapData);
-		ball3.specPower = 8;
+		ball3.specPower = 64;
 
 		var cube2:Object3D = new Object3D ("TexturedCube-1", GeometryController.CUBETEX);
 		cube2.uniformScale (4.0);
@@ -250,13 +250,18 @@ private var T:Number = 0.0;
 	ball3Animation (obj:Object3D)
 	:void
 	{
-		obj.rotateLocal (-1.5, Vector3D.X_AXIS);
-	
-		T += 0.01;
-		if (T > 27.0) T = 0.01;
+		ft += 0.02;
+		if (ft > 27.0) ft = 0.01;
+		const sinFT:Number = Math.sin (ft);
+		const cosFT:Number = Math.cos (ft);
 		const s:Number = 10.0;
-		var n:Number = Math.pow (0.5, (0.15 * T));
-		obj.moveTo ((s * n * Math.cos (2.0 * T)), (s * n), (s * n * Math.sin (2.0 * T)));
+		const n:Number = Math.pow (0.5, (0.15 * ft));
+		const sn:Number = (s * n);
+		// obj.moveTo ((s * n * Math.cos (2.0 * ft)), (s * n), (s * n * Math.sin (2.0 * ft)));
+		obj.moveTo ((sn * ((2.0 * cosFT * cosFT) - 1.0)), sn, (sn * (2.0 * sinFT * cosFT)));
+//		obj.setRotation (-Math.atan2 (sinFT, cosFT), Vector3D.Y_AXIS);
+		AXIS.x = cosFT; AXIS.y = 0.0, AXIS.z = sinFT;
+		obj.rotateLocal (3.0, AXIS);
 	} // End of ball3Animation().
 
 } // End of Main2 Class.

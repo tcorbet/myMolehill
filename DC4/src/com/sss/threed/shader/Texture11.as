@@ -3,7 +3,7 @@ package com.sss.threed.shader
 import com.sss.threed.shader.ProgramBase;
 /**
 ** @author J. Terry Corbet
-** @version 1.0 2013-01-28
+** @version 1.0 2013-03-09
 **
 ** Texture with effect from a single, directional light.
 ** This needs to be a Phong (per pixel) implementation, unlike Color1, becauase the
@@ -42,7 +42,7 @@ public final class Texture11 extends ProgramBase
 			"sat vt4.x, vt4.x \n" +
 			"mov vt4.yzw, vc27.x \n" +
 			"mov v1, vt4 \n" +  					// Pass the factor for the anti-light.
-			/* Not interesting for flat surfaces. Test when some curved, textured object appears.
+
 			"mov vt3.xyz, vc8.xyz \n" +				// l
 			"add vt3.xyz, vt3.xyz, vc10.xyz \n" +	// + v
 			"dp3 vt4.xyz, vt3.xyz, vt3.xyz \n" +	// sums
@@ -58,7 +58,7 @@ public final class Texture11 extends ProgramBase
 			"pow vt6.x, vt6.x, vc26.w \n" +			// is raised to some exponential value
 			"mov vt6.yzw, vc27.x \n" +				// which must be padded
 			"mov v2, vt6 \n" +						// in order to be passed along.
-			*/
+
 			"mov v3, va2"							// Pass UV Coordinates to the Fragment Shader.
 			),
 			/*----------*/
@@ -75,10 +75,11 @@ public final class Texture11 extends ProgramBase
 			"mul ft3.xyz, ft0.xyz, v1.x \n" +		// Moderate Diffuse color elements by anti-light factor.
 			"mul ft3.xyz, ft3.xyz, fc26.yyy \n" +	// Apply anti-light intensity weighting factor.
 			"add ft4.xyz, ft2.xyz, ft3.xyz \n" +	// Combine light and anti-light effects.
-			/* Not interesting for flat surfaces. Test when some curved, textured object appears.
-			"mul ft5.xyz, ft0.xyz, v2.x \n" +		// Moderate Diffuse color elements by specular factor.
-			"add ft4.xyz, ft4.xyz, ft5.xyz \n" +	// Add to the mix.
-			*/
+
+			"mul ft5.xyz, ft0.xyz, v2.x \n" +		// Apply specular intensity weighting factor.
+			"mul ft5.xyz, ft5.xyz, fc27.yyy \n" +	// If not switched off
+			"add ft4.xyz, ft4.xyz, ft5.xyz \n" +	// the specular contribution is added to the mix.
+
 			"mov ft4.w, ft0.w \n" +					// Set Alpha.
 			"mov oc, ft4"							// Send Moderated Color to Rasterizer.
 			)

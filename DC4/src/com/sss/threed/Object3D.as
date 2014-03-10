@@ -28,10 +28,12 @@ import com.sss.math.M;
 import com.sss.util.U;
 /**
 ** @author J. Terry Corbet
-** @version 1.0 2014-03-01
+** @version 1.0 2014-03-09
 */
 public class Object3D
 {
+	private const AXIS:Vector3D = new Vector3D();
+
 	private var _id:String;
 	private var _transform:Matrix3D;
 	private var _inverseTransform:Matrix3D;
@@ -234,6 +236,24 @@ public class Object3D
 		_transform.position = position;
 		transformChanged = true;
 	} // End of rotateLocal().
+
+	public function
+	setRotation (rad:Number, axis:Vector3D)
+	:void
+	{
+		var rads:Vector3D = comps[1];
+		if (axis == Vector3D.X_AXIS) {
+			AXIS.x = rad; AXIS.y = rads.y; AXIS.z = rads.z;
+		} else if (axis == Vector3D.Y_AXIS) {
+			AXIS.x = rads.x; AXIS.y = rad; AXIS.z = rads.z;
+		} else {
+			AXIS.x = rads.x; AXIS.y = rads.y; AXIS.z = rad;
+		}
+		_comps[1] = AXIS;
+		_comps[0] = _transform.position;
+		_transform.recompose (_comps);
+		transformChanged = true;
+	} // End of setRotation().
 
 	public function
 	addChild (child:Object3D, scene:Scene3D)

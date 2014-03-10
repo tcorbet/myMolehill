@@ -10,7 +10,7 @@ import flash.ui.Keyboard;
 import com.sss.math.M;
 /**
 ** @author J. Terry Corbet
-** @version 1.0 2014-02-07
+** @version 1.0 2014-03-06
 */
 public final class Camera
 {
@@ -22,8 +22,6 @@ public final class Camera
 	private const SOUTH_POLE:Number = .000001;
 	private const RAW:Vector.<Number> = new Vector.<Number> (16, true);
 	private const PIx2:Number = (Math.PI * 2.0);
-	private const TO_RAD:Number = (Math.PI / 180.0);
-	private const TO_DEG:Number = (180/0 / Math.PI);
 
 	private var _transform:Matrix3D;
 	private var _cameraView:Matrix3D;
@@ -325,7 +323,6 @@ public final class Camera
 	:void
 	{
 		var xAxis:Vector3D, yAxis:Vector3D, zAxis:Vector3D;
-		var rawData:Vector.<Number>;
 		
 		zAxis = target.subtract (position);
 		zAxis.normalize();

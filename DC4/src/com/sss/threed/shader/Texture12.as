@@ -3,12 +3,12 @@ package com.sss.threed.shader
 import com.sss.threed.shader.ProgramBase;
 /**
 ** @author J. Terry Corbet
-** @version 1.0 2014-01-28
+** @version 1.0 2014-03-09
 **
-** Currently the same as Texture11.
-** The only reason for the duplication is that Object3D needs to
-** be able to distinquish between the two techniques in activateTexture.
-** Use this for a BillBoard with modulated light.
+** Almost identical to Texture11, but since it is currently used only for the faceted
+** surface of a BillBoard, the application of the specular light component is not relevant.
+** The primary reason for the duplication is that Object3D needs to be able to distinquish
+** between the two techniques for generating the texture bitmaps in activateTexture.
 */
 public final class Texture12 extends ProgramBase
 {

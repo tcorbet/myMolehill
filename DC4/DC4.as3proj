@@ -12,7 +12,7 @@
     <movie minorVersion="9" />
     <movie platform="Flash Player" />
     <movie background="#FFFFFF" />
-    <movie preferredSDK="AIR 4.0.0;4.0.0;" />
+    <movie preferredSDK="AIR 13.0.0;13.0.0;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -43,7 +43,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="-swf-version=23&#xA;-inline" />
+    <option additional="-swf-version=24&#xA;-inline" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>
